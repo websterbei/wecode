@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>WeCode</title>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
+</head>
+<body>
+
+<div id="editor">//Start coding here
+</div>
+
+<script src="/javascripts/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/monokai");
+    editor.getSession().setMode("ace/mode/javascript");
+</script>
+
+<div id="connectorBox">
+  <script src="/javascripts/peerjs/peer.js"></script>
+  <input id="inputBox" name="peerCode" style="width:24%" placeholder="Input code" />
+  <button onclick="connect()">Connect</button>
+  <p id="myCode" style="right:0; top:0; width:20%;"></p>
+  <script>
+  var peer = new Peer({key: 'lwjd5qra8257b9', debug:true});
+  peer.on('open', function(id) {
+    document.getElementById('myCode').innerHTML = id;
+  });
+  </script>
+
+  <script>
+    peer.on('call', function(call) {
+      navigator.getUserMedia({video: true, audio: true}, function(stream) {
+        call.answer(stream); // Answer the call with an A/V stream.
+        call.on('stream', function(remoteStream) {
+          peerView = document.getElementById('peerView');
+          peerView.srcObject = remoteStream;
+        });
+      }, function(err) {
+        console.log('Failed to get local stream' ,err);
+      });
+    });
+  </script>
+
+  <script>
+    function connect() {
+      var inputBox = document.getElementById('inputBox');
+      var peerCode = inputBox.value;
+      navigator.getUserMedia({video: true, audio:true}, function(stream) {
+        var call = peer.call(peerCode, stream);
+        call.on('stream', function(remoteStream) {
+          peerView = document.getElementById('peerView');
+          peerView.srcObject = remoteStream;
+        });
+      }, function(err) {
+        console.log('Failed', err);
+      });
+    };
+  </script>
+</div>
+
+<div id="videoBox">
+    <video id="peerView" autoplay=true />
+</div>
+
+<div id="consoleBox">
+    <textarea id="console" placeholder="This is console"></textarea>
+</div>
+
+</body>
+</html>

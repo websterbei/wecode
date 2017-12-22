@@ -1,0 +1,45 @@
+#editor {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 50%;
+}
+
+#consoleBox {
+  resize: none;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100%;
+}
+
+#console {
+  resize: none;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+}
+
+#videoBox {
+  resize: none;
+  position: absolute;
+  top: 10%;
+  right: 0;
+  bottom: 50%;
+  left: 50%;
+  width: 100%;
+}
+
+#connectorBox {
+  resize: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 50%;
+  width: 100%;
+}

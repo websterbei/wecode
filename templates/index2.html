@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>ACE in Action</title>
+<style type="text/css" media="screen">
+    #editor {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 50%;
+    }
+    #consoleBox {
+      resize: none;
+      position: absolute;
+      top: 50%;
+      right: 0;
+      bottom: 0;
+      left: 50%;
+      width: 100%;
+    }
+    #console {
+      resize: none;
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 100%;
+    }
+    #videoBox {
+      resize: none;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 50%;
+      left: 50%;
+      width: 100%;
+    }
+</style>
+</head>
+<body>
+
+<div id="editor">//Start coding here
+</div>
+
+<script src="/javascripts/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/monokai");
+    editor.getSession().setMode("ace/mode/javascript");
+</script>
+
+<div id="videoBox">
+    <script src="/javascripts/peerjs/peer.js"></script>
+    <script>
+      //var peer = new Peer({key: 'peerjs', host: 'super.datinker.com', port: 9000, debug: 3});
+      var peer = new Peer({key: 'lwjd5qra8257b9', debug:true});
+      peer.on('open', function(id) {
+      console.log('My peer ID is: ' + id);
+      });
+      var conn = peer.connect('tsordo6hfm0lik9');
+      conn.on('open', function() {
+        console.log('Here');
+        conn.on('data', function(data) {
+        console.log('Received', data);
+        });
+        conn.send('Hello!');
+      });
+    </script>
+    <!-- <img id="video" style="width:50%" src="/images/video-conference.png"></img> -->
+</div>
+
+<div id="consoleBox">
+    <textarea id="console" placeholder="This is console"></textarea>
+</div>
+
+</body>
+</html>
