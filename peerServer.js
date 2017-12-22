@@ -15,6 +15,8 @@ var sslOptions = {
 
 var server = https.createServer(sslOptions, app).listen(PORT);
 
+peerServer = ExpressPeerServer(server, {debug: true});
+
 // CORS
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -22,5 +24,15 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use('/peerjs', ExpressPeerServer(server, {debug:true}));
+app.use('/peerjs', peerServer);
+
+peerServer.on('connection', function(id) {
+    console.log(id)
+  console.log(server._clients)
+});
+
+server.on('disconnect', function(id) {
+    console.log(id + "deconnected")
+});
+
 app.use('/', express.static(path.join(__dirname, '/client')))
