@@ -5,18 +5,16 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var fs = require('fs');
-var http = require('http');
 var https = require('https');
-var ExpressPeerServer = require('peer').ExpressPeerServer;
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
-
+var port = 8080;
 
 //SSL certificate
-var options = {
+var credentials = {
     ca: fs.readFileSync('./ssl/wecode_datinker_com.ca-bundle'),
     key: fs.readFileSync('./ssl/webster.key'),
     cert: fs.readFileSync('./ssl/wecode_datinker_com.crt')
@@ -55,12 +53,10 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-var port = 8080;
-var server = https.createServer(options, app);
-app.use('/peerjs', ExpressPeerServer(server));
+var httpsServer = https.createServer(credentials, app);
 
-server.listen(port, function(){
+httpsServer.listen(port, function() {
   console.log("Express server listening on port " + port);
-});
+});;
 
 module.exports = app;

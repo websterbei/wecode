@@ -22,7 +22,7 @@
   <button onclick="connect()">Connect</button>
   <p id="myCode" style="right:0; top:0; width:20%;"></p>
   <script>
-  var peer = new Peer({host: "wecode.datinker.com", port: 8080, secure: true, debug:true});
+  var peer = new Peer({host: "wecode.datinker.com", port: 8081, secure: true, debug:true});
   peer.on('open', function(id) {
     document.getElementById('myCode').innerHTML = id;
   });
