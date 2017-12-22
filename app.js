@@ -54,7 +54,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-var port = 3000;
+var port = 443;
 var server = https.createServer(options, app).listen(port, function(){
   console.log("Express server listening on port " + port);
 });
