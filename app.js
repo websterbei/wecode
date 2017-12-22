@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var fs = require('fs');
 var http = require('http');
 var https = require('https');
+var ExpressPeerServer = require('peer').ExpressPeerServer;
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -55,7 +56,10 @@ app.use(function(err, req, res, next) {
 });
 
 var port = 8080;
-var server = https.createServer(options, app).listen(port, function(){
+var server = https.createServer(options, app);
+app.use('/peerjs', ExpressPeerServer(server));
+
+server.listen(port, function(){
   console.log("Express server listening on port " + port);
 });
 
