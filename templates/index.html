@@ -59,7 +59,7 @@
               }];
   var peerConfig = {'iceServers': proxyList};
   //Creating peer object through peerjs server
-  var peer = new Peer({host: "altersocks.colab.duke.edu", port: 8081, path: "/peerjs", secure: true, debug:true, config: peerConfig});
+  var peer = new Peer({host: "wecode.datinker.com", port: 8080, path: "/peerjs", secure: true, debug:true, config: peerConfig});
   //Open socket, get personal ID and display ID
   peer.on('open', function(id) {
     document.getElementById('myCode').innerHTML = id;

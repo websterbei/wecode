@@ -11,7 +11,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
-var port = 8080;
+var port = 443;
 
 //SSL certificate
 var credentials = {

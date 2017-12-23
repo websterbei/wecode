@@ -1,6 +1,6 @@
 var express = require('express');
 var app = express();
-var PORT = 8081
+var PORT = 8080
 var ExpressPeerServer = require('peer').ExpressPeerServer;
 var path = require('path')
 var http = require('http');
