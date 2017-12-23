@@ -9,6 +9,7 @@ var https = require('https');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var compileAndRun = require('./routes/compileAndRun');
 
 var app = express();
 var port = 443;
@@ -34,6 +35,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/compileAndRun', compileAndRun);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

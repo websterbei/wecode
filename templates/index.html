@@ -3,98 +3,70 @@
 <head>
   <title>WeCode</title>
   <link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
+  <script src="/javascripts/jquery-3.2.1.js" async></script>
 </head>
 <body>
+<div id="controlBar">
+  <div id="editorControlBox">
+    <button onclick="saveDocument()">Save</button>
+    <button onclick="restoreCode()">Restore</button>
+    <button onclick="compileAndRun()" style="float:right">Run</button>
+    <script src="/javascripts/cookieHelper.js" defer></script>
+    <script>
+      function saveDocument() {
+        var code = editor.session.getValue();
+        setCookie('code', code, 3);
+      }
 
-<div id="editor">//Start coding here
+      function restoreCode() {
+        var code = getCookie('code');
+        editor.session.setValue(code);
+      }
+
+      function compileAndRun() {
+        var code = editor.session.getValue();
+        $.post({
+          url: "compileAndRun",
+          data: {
+            language: "java",
+            code: code
+          },
+          success: function(result) {
+            var myConsole = document.getElementById('console');
+            myConsole.value = result;
+          }
+        });
+      }
+    </script>
+  </div>
+
+  <div id="connectorBox">
+    <script src="/javascripts/peerjs/peer.js" defer></script>
+    <script src="/javascripts/videoCall.js" defer></script>
+    <div style="width:50%;left:50%;float:left">
+      <input id="inputBox" name="peerCode" style="width:40%" placeholder="Input code" />
+      <button onclick="connect()">Connect</button>
+    </div>
+    <div style="width:50%;float:right">
+      <p id="myCode" align="right" style="width:15%;display: inline"></p>
+    </div>
+  </div>
+</div>
+
+<div id="editor">public class Solution {
+  public static void main(String args[]) {
+
+  }
+}
 </div>
 
 <script src="/javascripts/ace/ace.js" type="text/javascript" charset="utf-8"></script>
 <script>
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/monokai");
-    editor.getSession().setMode("ace/mode/javascript");
+    editor.getSession().setMode("ace/mode/java");
+    editor.$blockScrolling = Infinity;
 </script>
-
-<div id="connectorBox">
-  <script src="/javascripts/peerjs/peer.js"></script>
-  <input id="inputBox" name="peerCode" style="width:24%" placeholder="Input code" />
-  <button onclick="connect()">Connect</button>
-  <p id="myCode" style="right:0; top:0; width:20%;"></p>
-  <script>
-  //A list of stun and turn servers
-  var proxyList = [{url:'stun:stun01.sipphone.com'},
-              {url:'stun:stun.ekiga.net'},
-              {url:'stun:stun.fwdnet.net'},
-              {url:'stun:stun.ideasip.com'},
-              {url:'stun:stun.iptel.org'},
-              {url:'stun:stun.rixtelecom.se'},
-              {url:'stun:stun.schlund.de'},
-              {url:'stun:stun.l.google.com:19302'},
-              {url:'stun:stun1.l.google.com:19302'},
-              {url:'stun:stun2.l.google.com:19302'},
-              {url:'stun:stun3.l.google.com:19302'},
-              {url:'stun:stun4.l.google.com:19302'},
-              {url:'stun:stunserver.org'},
-              {url:'stun:stun.softjoys.com'},
-              {url:'stun:stun.voiparound.com'},
-              {url:'stun:stun.voipbuster.com'},
-              {url:'stun:stun.voipstunt.com'},
-              {url:'stun:stun.voxgratia.org'},
-              {url:'stun:stun.xten.com'},
-              {
-                url: 'turn:turn.anyfirewall.com:443?transport=tcp',
-                credential: 'webrtc',
-                username: 'webrtc'
-              },
-              {
-                url: 'turn:numb.viagenie.ca',
-                credential: 'muazkh',
-                username: 'webrtc@live.com'
-              },
-              {
-                url: 'turn:192.158.29.39:3478?transport=udp',
-                credential: 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
-                username: '28224511:1379330808'
-              }];
-  var peerConfig = {'iceServers': proxyList};
-  //Creating peer object through peerjs server
-  var peer = new Peer({host: "wecode.datinker.com", port: 8080, path: "/peerjs", secure: true, debug:true, config: peerConfig});
-  //Open socket, get personal ID and display ID
-  peer.on('open', function(id) {
-    document.getElementById('myCode').innerHTML = id;
-  });
-  </script>
-  <script>
-    peer.on('call', function(call) {
-      navigator.getUserMedia({video: true, audio: true}, function(stream) {
-        call.answer(stream); // Answer the call with an A/V stream.
-        call.on('stream', function(remoteStream) { //receiving A/V stream
-          peerView = document.getElementById('peerView');
-          peerView.srcObject = remoteStream;
-        });
-      }, function(err) {
-        console.log('Failed to get local stream' ,err);
-      });
-    });
-  </script>
-
-  <script>
-    function connect() {
-      var inputBox = document.getElementById('inputBox');
-      var peerCode = inputBox.value; //Get peer ID
-      navigator.getUserMedia({video: true, audio:true}, function(stream) {
-        var call = peer.call(peerCode, stream); //Make call request, sending A/V stream
-        call.on('stream', function(remoteStream) { //If received stream, put to video object
-          peerView = document.getElementById('peerView');
-          peerView.srcObject = remoteStream;
-        });
-      }, function(err) {
-        console.log('Failed', err);
-      });
-    };
-  </script>
-</div>
 
 <div id="videoBox">
     <video id="peerView" autoplay=true />

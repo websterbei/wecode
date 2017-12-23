@@ -1,6 +1,6 @@
 #editor {
     position: absolute;
-    top: 0;
+    top: 20px;
     right: 0;
     bottom: 0;
     left: 0;
@@ -28,7 +28,7 @@
 #videoBox {
   resize: none;
   position: absolute;
-  top: 10%;
+  top: 20px;
   right: 0;
   bottom: 50%;
   left: 50%;
@@ -38,8 +38,24 @@
 #connectorBox {
   resize: none;
   position: absolute;
-  top: 0;
-  right: 0;
+  width: 50%;
   left: 50%;
+  float: right;
+}
+
+#editorControlBox {
+  resize: none;
+  position: absolute;
+  width: 50%;
+  float: left;
+}
+
+#controlBar {
+  resize: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   width: 100%;
+  height: 20px;
 }
