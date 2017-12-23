@@ -22,6 +22,7 @@
   <button onclick="connect()">Connect</button>
   <p id="myCode" style="right:0; top:0; width:20%;"></p>
   <script>
+  //A list of stun and turn servers
   var proxyList = [{url:'stun:stun01.sipphone.com'},
               {url:'stun:stun.ekiga.net'},
               {url:'stun:stun.fwdnet.net'},
@@ -42,11 +43,6 @@
               {url:'stun:stun.voxgratia.org'},
               {url:'stun:stun.xten.com'},
               {
-                url: 'turn:turn.bistri.com:80',
-                credential: 'homeo',
-                username: 'homeo'
-              },
-              {
                 url: 'turn:turn.anyfirewall.com:443?transport=tcp',
                 credential: 'webrtc',
                 username: 'webrtc'
@@ -60,24 +56,20 @@
                 url: 'turn:192.158.29.39:3478?transport=udp',
                 credential: 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
                 username: '28224511:1379330808'
-              },
-              {
-                url: 'turn:192.158.29.39:3478?transport=tcp',
-                credential: 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
-                username: '28224511:1379330808'
               }];
   var peerConfig = {'iceServers': proxyList};
-  var peer = new Peer({host: "wecode.datinker.com", port: 8081, path: "/peerjs", secure: true, debug:true, config: peerConfig});
+  //Creating peer object through peerjs server
+  var peer = new Peer({host: "altersocks.colab.duke.edu", port: 8081, path: "/peerjs", secure: true, debug:true, config: peerConfig});
+  //Open socket, get personal ID and display ID
   peer.on('open', function(id) {
     document.getElementById('myCode').innerHTML = id;
   });
   </script>
-
   <script>
     peer.on('call', function(call) {
       navigator.getUserMedia({video: true, audio: true}, function(stream) {
         call.answer(stream); // Answer the call with an A/V stream.
-        call.on('stream', function(remoteStream) {
+        call.on('stream', function(remoteStream) { //receiving A/V stream
           peerView = document.getElementById('peerView');
           peerView.srcObject = remoteStream;
         });
@@ -90,10 +82,10 @@
   <script>
     function connect() {
       var inputBox = document.getElementById('inputBox');
-      var peerCode = inputBox.value;
+      var peerCode = inputBox.value; //Get peer ID
       navigator.getUserMedia({video: true, audio:true}, function(stream) {
-        var call = peer.call(peerCode, stream);
-        call.on('stream', function(remoteStream) {
+        var call = peer.call(peerCode, stream); //Make call request, sending A/V stream
+        call.on('stream', function(remoteStream) { //If received stream, put to video object
           peerView = document.getElementById('peerView');
           peerView.srcObject = remoteStream;
         });
