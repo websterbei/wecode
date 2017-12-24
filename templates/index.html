@@ -8,9 +8,9 @@
 <body>
 <div id="controlBar">
   <div id="editorControlBox">
-    <button onclick="saveDocument()">Save</button>
-    <button onclick="restoreCode()">Restore</button>
-    <button onclick="compileAndRun()" style="float:right">Run</button>
+    <button class="control" onclick="saveDocument()">SAVE</button>
+    <button class="control" onclick="restoreCode()">RESTORE</button>
+    <button class="control" onclick="compileAndRun()" style="float:right">RUN</button>
     <script src="/javascripts/cookieHelper.js" defer></script>
     <script>
       function saveDocument() {
@@ -43,13 +43,17 @@
   <div id="connectorBox">
     <script src="/javascripts/peerjs/peer.js" defer></script>
     <script src="/javascripts/videoCall.js" defer></script>
-    <div style="width:50%;left:50%;float:left">
-      <input id="inputBox" name="peerCode" style="width:40%" placeholder="Input code" />
-      <button onclick="connect()">Connect</button>
+    <div style="width:40%;float:left;">
+      <input id="inputBox" name="peerCode" style="width:60%;font-size:10pt;background-color:#444242;border: 0px;height:20px" placeholder="INPUT CODE" />
+      <button class="control" onclick="connect()">CONNECT</button>
     </div>
-    <div style="width:50%;float:right">
-      <p id="myCode" align="right" style="width:15%;display: inline"></p>
-    </div>
+    <button id="myCode" onclick="copyCode()" align="right"></button>
+      <script>
+        function copyCode() {
+          var myCode = document.getElementById('myCode').innerHTML;
+          window.prompt("Copy to clipboard: Ctrl+C, Enter", myCode);
+        }
+      </script>
   </div>
 </div>
 
@@ -66,10 +70,14 @@
     editor.setTheme("ace/theme/monokai");
     editor.getSession().setMode("ace/mode/java");
     editor.$blockScrolling = Infinity;
+    editor.setShowPrintMargin(false);
 </script>
 
 <div id="videoBox">
+  <div style="position: relative">
     <video id="peerView" autoplay=true />
+  </div>
+    <video id="selfView" autoplay=true />
 </div>
 
 <div id="consoleBox">

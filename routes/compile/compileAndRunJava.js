@@ -20,7 +20,7 @@ function folderCreation() {
 
 function compile(folder, filename) {
   var command = 'javac ' + folder.name + '/' + filename;
-  var result = exec(command);
+  var result = exec(command, 7000);
   if(result.status != 0) return result.stderr;
 }
 
@@ -28,7 +28,7 @@ function runCode(folder, filename) {
   var binary = filename.split('.')[0];
   var command = 'cd '+folder.name+'&&' + 'java ' + binary;
   console.log(command);
-  var result = exec(command);
+  var result = exec(command, 7000);
   if(result.status != 0) return result.stderr;
   return result.stdout;
 }

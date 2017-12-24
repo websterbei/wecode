@@ -43,6 +43,7 @@ peer.on('open', function(id) {
 peer.on('call', function(call) {
   navigator.getUserMedia({video: true, audio: true}, function(stream) {
     call.answer(stream); // Answer the call with an A/V stream.
+    document.getElementById('selfView').srcObject = stream;
     call.on('stream', function(remoteStream) { //receiving A/V stream
       peerView = document.getElementById('peerView');
       peerView.srcObject = remoteStream;
@@ -57,6 +58,7 @@ function connect() {
   var peerCode = inputBox.value; //Get peer ID
   navigator.getUserMedia({video: true, audio:true}, function(stream) {
     var call = peer.call(peerCode, stream); //Make call request, sending A/V stream
+    document.getElementById('selfView').srcObject = stream;
     call.on('stream', function(remoteStream) { //If received stream, put to video object
       peerView = document.getElementById('peerView');
       peerView.srcObject = remoteStream;
