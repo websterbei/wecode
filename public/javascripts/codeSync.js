@@ -44,7 +44,6 @@ function codeSyncInitializer() {
     var conn = codeSyncPeer.connect(peerCodeSyncId);
     conn.on('open', function() {
       conn.on('data', function(data) {
-        console.log(data);
         incomingCodeHandler(data);
       });
       editor.session.on('change', function (delta) {
