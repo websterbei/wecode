@@ -6,43 +6,30 @@
   <script src="/javascripts/jquery-3.2.1.js" async></script>
 </head>
 <body>
+
+<!-- code for the control bar -->
 <div id="controlBar">
+  <!-- code for the editor controls -->
   <div id="editorControlBox">
     <button class="control" onclick="saveDocument()">SAVE</button>
     <button class="control" onclick="restoreCode()">RESTORE</button>
+    <button class="control" onclick="codeSyncInitializer()">SHARE</button>
+    <button class="control" onclick="sayHello()">TEST</button>
     <button class="control" onclick="compileAndRun()" style="float:right">RUN</button>
-    <script src="/javascripts/cookieHelper.js" defer></script>
     <script>
-      function saveDocument() {
-        var code = editor.session.getValue();
-        setCookie('code', code, 3);
-      }
-
-      function restoreCode() {
-        var code = getCookie('code');
-        editor.session.setValue(code);
-      }
-
-      function compileAndRun() {
-        var code = editor.session.getValue();
-        $.post({
-          url: "compileAndRun",
-          data: {
-            language: "java",
-            code: code
-          },
-          success: function(result) {
-            var myConsole = document.getElementById('console');
-            myConsole.value = result;
-          }
-        });
+      function sayHello() {
+        var conn = codeSyncPeer.connections[getCookie('peerCodeSyncId')];
+        conn.send("Hello");
       }
     </script>
+    <script src="/javascripts/cookieHelper.js" defer></script>
+    <script src="/javascripts/editorControl.js" defer></script>
   </div>
-
+  <!-- code for the video connection controls -->
   <div id="connectorBox">
     <script src="/javascripts/peerjs/peer.js" defer></script>
     <script src="/javascripts/videoCall.js" defer></script>
+    <script src="javascripts/codeSync.js" defer></script>
     <div style="width:40%;float:left;">
       <input id="inputBox" name="peerCode" style="width:60%;font-size:10pt;background-color:#444242;border: 0px;height:20px" placeholder="INPUT CODE" />
       <button class="control" onclick="connect()">CONNECT</button>
@@ -51,12 +38,13 @@
       <script>
         function copyCode() {
           var myCode = document.getElementById('myCode').innerHTML;
-          window.prompt("Copy to clipboard: Ctrl+C, Enter", myCode);
+          window.prompt("Copy the code and sent it to a friend:", myCode);
         }
       </script>
   </div>
 </div>
 
+<!-- code for the editor -->
 <div id="editor">public class Solution {
     public static void main(String args[]) {
 
@@ -64,6 +52,7 @@
 }
 </div>
 
+<!-- code for the the actual editor instantiation and setting -->
 <script src="/javascripts/ace/ace.js" type="text/javascript" charset="utf-8"></script>
 <script>
     var editor = ace.edit("editor");
@@ -73,6 +62,7 @@
     editor.setShowPrintMargin(false);
 </script>
 
+<!-- code for the video boxes -->
 <div id="videoBox">
   <div style="position: relative">
     <video id="peerView" autoplay=true />
@@ -80,6 +70,7 @@
     <video id="selfView" autoplay=true muted />
 </div>
 
+<!-- code for the console box -->
 <div id="consoleBox">
     <textarea id="console" placeholder="This is console"></textarea>
 </div>
