@@ -3,13 +3,14 @@ var tmp = require('tmp');
 var exec = require('sync-exec');
 
 function execution(code) {
+  var className = code.match('public\\s+class\\s+[^{]+{')[0].slice(0,-1).trim().split(/\s/).slice(-1)[0];
   var folder = folderCreation();
-  var filename = "Solution.java";
+  var filename = className + '.java';
   var sourceFile = folder.name + '/' + filename;
   fs.writeFileSync(sourceFile, code);
   var result = compile(folder, filename);
   if(result) return result;
-  result = runCode(folder, filename);
+  result = runCode(folder, className);
   return result;
 }
 
@@ -24,9 +25,8 @@ function compile(folder, filename) {
   if(result.status != 0) return result.stderr;
 }
 
-function runCode(folder, filename) {
-  var binary = filename.split('.')[0];
-  var command = 'cd '+folder.name+'&&' + 'java ' + binary;
+function runCode(folder, className) {
+  var command = 'cd '+folder.name+'&&' + 'java ' + className;
   console.log(command);
   var result = exec(command, 7000);
   if(result.status != 0) return result.stderr;
