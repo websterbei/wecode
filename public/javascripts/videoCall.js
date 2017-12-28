@@ -38,6 +38,7 @@ var peer = new Peer({host: "wecode.datinker.com", port: 8080, path: "/peerjs", s
 //Open socket, get personal ID and display ID
 peer.on('open', function(id) {
   document.getElementById('myCode').innerHTML = id;
+  document.getElementById('myCodeInvisible').value = id;
 });
 
 peer.on('call', function(call) {
@@ -54,8 +55,8 @@ peer.on('call', function(call) {
 });
 
 function connect() {
-  var inputBox = document.getElementById('inputBox');
-  var peerCode = inputBox.value; //Get peer ID
+  var peerCodeInput = document.getElementById('peerCodeInput');
+  var peerCode = peerCodeInput.value; //Get peer ID
   navigator.getUserMedia({video: true, audio:true}, function(stream) {
     var call = peer.call(peerCode, stream); //Make call request, sending A/V stream
     document.getElementById('selfView').srcObject = stream;

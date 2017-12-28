@@ -1,0 +1,16 @@
+#selfView {
+  position: absolute;
+  resize: none;
+  z-index: 1000;
+  top: 0;
+  max-width: 30%;
+  min-width: 30%;
+  height: auto;
+}
+
+#peerView {
+  resize: none;
+  top: 0;
+  width: 100%;
+  height: auto;
+}

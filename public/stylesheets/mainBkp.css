@@ -1,0 +1,115 @@
+#controlBar {
+  resize: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  max-width: 100%;
+  background-color: #272922;
+  z-index: 30000;
+}
+
+#editorControlBox {
+  resize: none;
+  position: absolute;
+  width: 60%;
+  max-width: 60%;
+  float: left;
+}
+
+#connectorBox {
+  resize: none;
+  position: absolute;
+  width: 40%;
+  max-width: 40%;
+  left: 60%;
+  height: 30px;
+  float: right;
+}
+
+#myCode {
+  border: 0px outset #272922;
+  background-color: #272922;
+  cursor:pointer;
+  color: white;
+  height: 30px;
+  float: right;
+}
+
+.control {
+   border: 0px outset #272922;
+   background-color: #272922;
+   cursor:pointer;
+   color: white;
+   height: 30px;
+}
+
+.control:hover {
+   background-color: #44473f;
+   color:white;
+}
+
+#editor {
+    position: absolute;
+    top: 30px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 60%;
+}
+
+#videoBox {
+  resize: none;
+  position: absolute;
+  top: 30px;
+  right: 0;
+  height: 50%;
+  max-height: 50%;
+  left: 60%;
+  width: 40%;
+  max-width: 40%;
+  background-color: black;
+}
+
+#selfView {
+  position: absolute;
+  z-index: 20000;
+  top: 0;
+  right: 0;
+  max-width: 30%;
+  max-height: 30%;
+  width: auto;
+  height: auto;
+}
+
+#peerView {
+  position: absolute;
+  max-width: 100%;
+  min-width: 100%;
+}
+
+#consoleBox {
+  resize: none;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  bottom: 0;
+  left: 60%;
+  width: 40%;
+  max-width: 40%;
+}
+
+#console {
+  resize: none;
+  position: absolute;
+  top: 0;
+  border-left: 0;
+  border-top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #212F3D;
+  color: white;
+  font-size: 10pt;
+  z-index: 30000;
+}

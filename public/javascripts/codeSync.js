@@ -34,10 +34,19 @@ function codeSyncInitializer() {
     var codeSyncId = null;
   }
   if(codeSyncId) {
-    var input = window.prompt("Copy your code or paste a friend's code:", codeSyncId);
+    document.getElementById('codeSyncId').value = codeSyncId;
   } else {
-    var input = window.prompt("Copy your code or paste a friend's code:", "Waiting for code");
+    document.getElementById('codeSyncId').value = "Waiting for code";
   }
+}
+
+function initiateCodeSync() {
+  if(codeSyncPeer && codeSyncPeer.id) {
+    var codeSyncId = codeSyncPeer.id;
+  } else {
+    var codeSyncId = null;
+  }
+  var input = document.getElementById('codeSyncId').value;
   if(input!==codeSyncId) {
     let peerCodeSyncId = input;
     setCookie('peerCodeSyncId', peerCodeSyncId, 3);

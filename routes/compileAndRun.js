@@ -7,7 +7,8 @@ var execution = require('./compile/compileAndRunJava')
 router.post('/', function(req, res, next) {
   var language = req.body.language;
   var code = req.body.code;
-  var result = execution(code);
+  var stdin = req.body.stdin;
+  var result = execution(code, stdin);
   res.send(result);
 });
 
