@@ -1,12 +1,10 @@
 function saveDocument() {
   var code = editor.session.getValue();
   setCookie('code', code, 3);
-  console.log(code);
 }
 
 function restoreCode() {
   var code = getCookie('code');
-  console.log(code);
   editor.session.setValue(code);
 }
 

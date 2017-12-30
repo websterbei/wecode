@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<div class="container-fluid">
+<div id="wholePage" class="container-fluid">
 <div class="container-fluid">
   <!-- code for the control bar -->
   <div class="row">
@@ -52,6 +52,15 @@
             </div>
           </div>
         </div>
+      <div class="btn-group">
+        <button id="themeSelectDropdown" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Solarized Light</button>
+        <div class="dropdown-menu" aria-labelledby="themeSelectDropdown">
+          <a class="dropdown-item" onclick="changeThemeTo(this)" name="solarized_light">Solarized Light</a>
+          <a class="dropdown-item" onclick="changeThemeTo(this)" name="chaos">Chaos</a>
+          <a class="dropdown-item" onclick="changeThemeTo(this)" name="xcode">Xcode</a>
+          <a class="dropdown-item" onclick="changeThemeTo(this)" name="ambiance">Ambiance</a>
+        </div>
+      </div>
       <button class="btn btn-secondary" onclick="compileAndRun()" style="float:right">RUN</button>
     </div>
   <!-- code for the video connection controls -->
@@ -130,9 +139,18 @@
 
 <!-- code for the the actual editor instantiation and setting -->
 <script src="/javascripts/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="/javascripts/ace/ext-language_tools.js"></script>
+<script src="javascripts/themeChanger.js"></script>
 <script>
+    ace.require("ace/ext/language_tools");
     var editor = ace.edit("editor");
-    editor.setTheme("ace/theme/solarized_light");
+    editor.setOptions({
+      enableBasicAutocompletion: true,
+      enableSnippets: true,
+      enableLiveAutocompletion: true
+    });
+    setEditorTheme('solarized_light', 'Solarized Light');
+    setPageTheme('solarized_light');
     editor.getSession().setMode("ace/mode/java");
     editor.$blockScrolling = Infinity;
     editor.setShowPrintMargin(false);
@@ -147,6 +165,5 @@
 <script src="/javascripts/peerjs/peer.js" defer></script>
 <script src="/javascripts/videoCall.js" defer></script>
 <script src="javascripts/codeSync.js" defer></script>
-
 </body>
 </html>
