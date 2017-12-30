@@ -1,0 +1,10 @@
+var express = require('express');
+var path = require('path');
+var router = express.Router();
+
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  res.sendFile('codepad.html', {root: path.join(__dirname, '../templates')});
+});
+
+module.exports = router;
