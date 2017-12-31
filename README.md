@@ -16,6 +16,6 @@ wecode.js will provide the functionalities that support the capabilities of the 
 
 ### Step 1
 Install homebrew
-'''bash
+```bash
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-'''
+```
