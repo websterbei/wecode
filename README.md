@@ -19,3 +19,27 @@ Install homebrew
 ```bash
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
+
+### Step 2
+Install node.js and npm using homebrew
+```bash
+brew install node
+```
+
+### Step 3
+cd into the folder where wecode.js resides, and run the following command
+```bash
+npm install nodemon -g
+```
+This should install nodemon for you. Nodemon is used to watch the changes in the source folder and restart the express app when code changes.
+
+### Step 4
+In the same folder, run the command
+```bash
+sudo nodemon wecode.js
+```
+This should start the WeCode framework at port 443.
+
+### Step 5
+You are now able to access WeCode at https://127.0.0.1
+Note that your browser may warn you against your access because of the mismatch between the SSL certificate and the actual url. However, this will not be an issue and you should be able to proceed by dismissing the warning.
