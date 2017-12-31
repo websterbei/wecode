@@ -11,3 +11,11 @@ Deployment of the WeCode framework is simple:
 
 ## Explanation
 wecode.js will provide the functionalities that support the capabilities of the framework and peerServer.js will start a signaling system for the WebRTC framework used in WeCode framework.
+
+## Local Test
+
+### Step 1
+Install homebrew
+'''bash
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+'''

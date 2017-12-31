@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>WeCode</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/codepad.css">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/buttons.css">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/video.css">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+</head>
+<body>
+
+<div id="wholePage" class="container-fluid">
+<div class="container-fluid">
+  <!-- code for the control bar -->
+  <div class="row">
+  <!-- code for the editor controls -->
+    <div class="col-7">
+      <div class="btn-group" role="group">
+        <button class="btn btn-secondary" onclick="saveDocument()">SAVE</button>
+        <button class="btn btn-secondary" onclick="restoreCode()">RESTORE</button>
+      </div>
+        <!-- Modal control button -->
+        <button class="btn btn-secondary" data-toggle="modal" data-target="#codeSyncModal" onclick="codeSyncInitializer()">SHARE</button>
+        <!-- Modal -->
+        <div class="modal fade" id="codeSyncModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button class="btn btn-secondary" onclick="copyMySyncCode()">Copy My Code</button>
+                <script>
+                  function copyMySyncCode() {
+                    var mySyncCode = document.getElementById('codeSyncId');
+                    mySyncCode.select();
+                    document.execCommand('copy');
+                  }
+                </script>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="input-group">
+                  <input id="codeSyncId" class="form-control"></input>
+                  <div class="input-group-btn">
+                      <button class="btn btn-secondary" type="button" onclick="initiateCodeSync()">SYNC</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <div class="btn-group">
+        <button id="themeSelectDropdown" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Solarized Light</button>
+        <div class="dropdown-menu" aria-labelledby="themeSelectDropdown">
+          <a class="dropdown-item" onclick="changeThemeTo(this)" name="solarized_light">Solarized Light</a>
+          <a class="dropdown-item" onclick="changeThemeTo(this)" name="chaos">Chaos</a>
+          <a class="dropdown-item" onclick="changeThemeTo(this)" name="xcode">Xcode</a>
+          <a class="dropdown-item" onclick="changeThemeTo(this)" name="ambiance">Ambiance</a>
+        </div>
+      </div>
+      <button class="btn btn-secondary" onclick="compileAndRun()" style="float:right">RUN</button>
+    </div>
+  <!-- code for the video connection controls -->
+    <div class="col">
+      <div class="input-group">
+      <input id="peerCodeInput" type="text" class="form-control" placeholder="PEER CODE" aria-label="Peer ID">
+      <div class="input-group-btn">
+        <button class="btn btn-secondary" type="button" onclick="connect()">CONNECT</button>
+        <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <div class="dropdown-menu">
+          <a id="myCode" class="dropdown-item" onclick="copyCode()"></a>
+          <input id="myCodeInvisible" class="sr-only"></input>
+        </div>
+      </div>
+    </div>
+      <script>
+        function copyCode() {
+          var myCode = document.getElementById('myCodeInvisible');
+          myCode.select();
+          document.execCommand('copy');
+        }
+      </script>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <!-- code for the editor -->
+  <div class="row">
+    <div class="col-7">
+      <div id="editor">public class Solution {
+    public static void main(String args[]) {
+
+    }
+}
+      </div>
+    </div>
+
+    <div class="col">
+      <!-- code for the video boxes -->
+
+        <div class="div2-1">
+          <div style="position: relative; min-height:60%; max-height:60%">
+            <video id="peerView" autoplay=true />
+          </div>
+            <video id="selfView" autoplay=true muted />
+        </div>
+
+      <!-- code for the console box -->
+        <div class="div2-2" width="100%" height="40%">
+
+          <ul class="nav nav-tabs" id="io-tabs" role="io">
+            <li class="nav-item">
+              <a class="nav-link active" id="output-tab" data-toggle="tab" href="#console-output" role="tab" aria-controls="console-output" aria-selected="true">OUTPUT</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="input-tab" data-toggle="tab" href="#console-input" role="tab" aria-controls="console-input" aria-selected="false">INPUT</a>
+            </li>
+          </ul>
+          <div class="tab-content" id="io-tab-content">
+            <div class="tab-pane fade" id="console-output" role="tabpanel" aria-labelledby="output-tab">
+              <textarea id="stdout" class="form-control" style="resize:none;border-top:none;min-height:400px"></textarea>
+            </div>
+
+            <div class="tab-pane fade show active" id="console-input" role="tabpanel" aria-labelledby="input-tab">
+              <textarea id="stdin" class="form-control" style="resize:none;border-top:none;min-height:300px"></textarea>
+            </div>
+          </div>
+
+        </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- code for the the actual editor instantiation and setting -->
+<script src="/javascripts/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="/javascripts/ace/ext-language_tools.js"></script>
+<script src="/javascripts/themeChanger.js"></script>
+<script>
+    ace.require("ace/ext/language_tools");
+    var editor = ace.edit("editor");
+    editor.setOptions({
+      enableBasicAutocompletion: true,
+      enableSnippets: true,
+      enableLiveAutocompletion: true
+    });
+    setEditorTheme('solarized_light', 'Solarized Light');
+    setPageTheme('solarized_light');
+    editor.getSession().setMode("ace/mode/java");
+    editor.$blockScrolling = Infinity;
+    editor.setShowPrintMargin(false);
+</script>
+
+
+<script src="/javascripts/jquery-3.2.1.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous" defer></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous" defer></script>
+<script src="/javascripts/cookieHelper.js" defer></script>
+<script src="/javascripts/editorControl.js" defer></script>
+<script src="/javascripts/peerjs/peer.js" defer></script>
+<script src="/javascripts/videoCall.js" defer></script>
+<script src="/javascripts/codeSync.js" defer></script>
+</body>
+</html>

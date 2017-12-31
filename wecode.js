@@ -6,12 +6,14 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var fs = require('fs');
 var https = require('https');
+var nunjucks = require('nunjucks');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 var compileAndRun = require('./routes/compileAndRun');
 var codepad = require('./routes/codepad');
 var createRoom = require('./routes/createRoom');
+var room = require('./routes/room');
 
 var app = express();
 var port = 443;
@@ -24,8 +26,12 @@ var credentials = {
 };
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+//app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'html');
+nunjucks.configure('views', {
+    autoescape: true,
+    express: app
+});
 
 // uncomment after placing your favicon in /public
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -40,6 +46,7 @@ app.use('/codepad', codepad);
 app.use('/users', users);
 app.use('/compileAndRun', compileAndRun);
 app.use('/createRoom', createRoom);
+app.use('/room', room);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -56,7 +63,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error', {err});
 });
 
 var httpsServer = https.createServer(credentials, app);
