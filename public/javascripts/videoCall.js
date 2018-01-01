@@ -32,6 +32,7 @@ var proxyList = [{url:'stun:stun01.sipphone.com'},
               credential: 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
               username: '28224511:1379330808'
             }];
+
 var peerConfig = {'iceServers': proxyList};
 //Creating peer object through peerjs server
 var peer = new Peer({host: "wecode.datinker.com", port: 8080, path: "/peerjs", secure: true, debug:true, config: peerConfig});
@@ -39,8 +40,24 @@ var peer = new Peer({host: "wecode.datinker.com", port: 8080, path: "/peerjs", s
 peer.on('open', function(id) {
   document.getElementById('myCode').innerHTML = id;
   document.getElementById('myCodeInvisible').value = id;
-});
+  //Register on the server that a user is in the room
+  var roomName = window.location.href.split('/').slice(-1)[0];
+  $.post({
+    url: "/newUserInRoom",
+    data: {
+      roomName: roomName,
+      peerId: id
+    },
+    success: function(result) {
+      console.log(result);
+    }
+  });
 
+  $(window).on('unload', function (e) {
+    navigator.sendBeacon('/userExitsRoom', {data:'data'});
+  });
+});
+//Ready to accept connection
 peer.on('call', function(call) {
   navigator.getUserMedia({video: true, audio: true}, function(stream) {
     call.answer(stream); // Answer the call with an A/V stream.
