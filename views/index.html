@@ -4,10 +4,7 @@
   <title>WeCode</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" type="text/css" href="/stylesheets/codepad.css">
-  <link rel="stylesheet" type="text/css" href="/stylesheets/buttons.css">
-  <link rel="stylesheet" type="text/css" href="/stylesheets/video.css">
-  <link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/index-page.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 </head>
 <body>
@@ -24,13 +21,45 @@
 
   <div class='container-fluid'>
     <div class="row">
-      <label for="createRoom" class="col-sm-3 col-form-label">https://WeCode.datinker.com/room/</label>
       <div class="col-sm-7">
-        <input type="text" class="form-control" id="roomName" placeholder="Code Room Name" required>
+        <div class='large-cell'>
+        </div>
       </div>
-      <div class="col-sm-2">
-        <button class="btn btn-secondary" onclick="createRoom()">CREATE ROOM</button>
-      </div>
+      <div class="col-sm-5">
+        <div class="center-align">
+          <div id="createRoomCard" class="card" style="width: 30rem;">
+            <div class="card-body">
+              <h4 class="card-title" style="text-align: center">Create a code room, start coding!</h4>
+                <div class="row">
+                  <div class="col">
+                    <label for="roomName" style="line-height: 40px; float:right">
+                      wecode.datinker.com/room/
+                    </label>
+                  </div>
+                  <div class="col"><input type="text" class="form-control" id="roomName" placeholder="Code Room Name" required></div>
+                </div>
+                <br>
+                <div class="row">
+                  <button class="btn btn-primary fullsize-center" onclick="createRoom()">Create new room</button>
+                </div>
+                <br>
+                <div class="row">
+                  <div style="text-align: center; margin: auto">
+                    Know where to go? <a href="#" onclick="gotoRoom()">Enter room name and go!</a>
+                    <script>
+                      function gotoRoom() {
+                        var roomName = document.getElementById('roomName').value;
+                        var host = window.location.hostname;
+                        var protocol = window.location.protocol;
+                        window.location = protocol + '//' + host + '/room/' + roomName;
+                      }
+                    </script>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      <div>
     </div>
   </div>
 </div>

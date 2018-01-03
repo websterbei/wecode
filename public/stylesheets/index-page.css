@@ -1,0 +1,32 @@
+body {
+  background-image: url('/images/index-page-background.jpg');
+  background-size: 100%;
+}
+
+.large-cell {
+  align: center;
+  width: 300px;
+  height: 600px;
+}
+
+.center-align {
+  position: relative;
+  height: 100%;
+}
+
+#createRoomCard {
+  height: 250px;
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+}
+
+.col {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.fullsize-center {
+  margin: auto;
+  width: 80%;
+}
