@@ -40,23 +40,14 @@ var peer = new Peer({host: "wecode.datinker.com", port: 8080, path: "/peerjs", s
 peer.on('open', function(id) {
   document.getElementById('myCode').innerHTML = id;
   document.getElementById('myCodeInvisible').value = id;
-  //Register on the server that a user is in the room
-  var roomName = window.location.href.split('/').slice(-1)[0];
-  $.post({
-    url: "/newUserInRoom",
-    data: {
-      roomName: roomName,
-      peerId: id
-    },
-    success: function(result) {
-      console.log(result);
-    }
-  });
 
-  $(window).on('unload', function (e) {
-    navigator.sendBeacon('/userExitsRoom', {data:'data'});
-  });
+  if(window.location.href.split('/').length <= 4) return; //Not accessing a room, but rather, accessing codepad directly
+  var roomName = window.location.href.split('/').slice(-1)[0];
+  //Initiate heartbeat timer
+  var heartBeat = heartBeatFactory(roomName, id);
+  window.setInterval(heartBeat, 5000);
 });
+
 //Ready to accept connection
 peer.on('call', function(call) {
   navigator.getUserMedia({video: true, audio: true}, function(stream) {
@@ -84,4 +75,4 @@ function connect() {
   }, function(err) {
     console.log('Failed', err);
   });
-};
+}

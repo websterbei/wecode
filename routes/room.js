@@ -14,7 +14,7 @@ router.get('/:roomName', function(req, res, next) {
       res.render('error', {err});
     } else if(result) {
       res.status(200);
-      res.render('codepad');
+      res.render('room');
     } else {
       var err = new Error('Chat Room Not Found');
       err.status = 666;

@@ -3,7 +3,6 @@ var path = require('path');
 var Redis = require('ioredis');
 var router = express.Router();
 
-
 function roomInitialize(redis, roomName) {
   var key = 'rooms:'+roomName;
   redis.set(key, true);

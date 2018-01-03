@@ -14,8 +14,7 @@ var compileAndRun = require('./routes/compileAndRun');
 var codepad = require('./routes/codepad');
 var createRoom = require('./routes/createRoom');
 var room = require('./routes/room');
-var newUserInRoom = require('./routes/newUserInRoom');
-var userExitsRoom = require('./routes/userExitsRoom');
+var userInRoom = require('./routes/userInRoom');
 
 var app = express();
 var port = 443;
@@ -40,6 +39,7 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.text());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -49,8 +49,7 @@ app.use('/users', users);
 app.use('/compileAndRun', compileAndRun);
 app.use('/createRoom', createRoom);
 app.use('/room', room);
-app.use('/newUserInRoom', newUserInRoom);
-app.use('/userExitsRoom', userExitsRoom);
+app.use('/userInRoom', userInRoom);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
