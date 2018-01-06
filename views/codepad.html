@@ -4,100 +4,122 @@
   <title>WeCode</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="/stylesheets/codepad.css">
   <link rel="stylesheet" type="text/css" href="/stylesheets/buttons.css">
   <link rel="stylesheet" type="text/css" href="/stylesheets/video.css">
   <link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/body.css">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/navbar.css">
 </head>
+
 <body>
 
-<div id="wholePage" class="container-fluid">
-<div class="container-fluid">
-  <!-- code for the control bar -->
-  <div class="row">
-  <!-- code for the editor controls -->
-    <div class="col-7">
-      <div class="btn-group" role="group">
-        <button class="btn btn-secondary" onclick="saveDocument()">SAVE</button>
-        <button class="btn btn-secondary" onclick="restoreCode()">RESTORE</button>
-      </div>
-        <!-- Modal control button -->
-        <button class="btn btn-secondary" data-toggle="modal" data-target="#codeSyncModal" onclick="codeSyncInitializer()">SHARE</button>
-        <!-- Modal -->
-        <div class="modal fade" id="codeSyncModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button class="btn btn-secondary" onclick="copyMySyncCode()">Copy My Code</button>
-                <script>
-                  function copyMySyncCode() {
-                    var mySyncCode = document.getElementById('codeSyncId');
-                    mySyncCode.select();
-                    document.execCommand('copy');
-                  }
-                </script>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <div class="input-group">
-                  <input id="codeSyncId" class="form-control"></input>
-                  <div class="input-group-btn">
-                      <button class="btn btn-secondary" type="button" onclick="initiateCodeSync()">SYNC</button>
+<div id="wholePage">
+<!-- navigation bar-->
+<nav class="nav navbar-inverse navbar-fixed-top navbar-toggleable-md " role="navigation" style="height:50px">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                <img src="/images/logo.png" width=100 style="border-radius: 10px;">
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!-- main part of the page-->
+<div id="mainBody">
+    <div class="row" id="control-buttons">
+    <!-- code for the editor controls -->
+      <div class="col-7">
+        <div class="btn-group" role="group">
+          <button class="btn btn-light" onclick="saveDocument()">
+              <i class="fa fa-floppy-o" aria-hidden="true"></i>  save</button>
+          <button class="btn btn-light" onclick="restoreCode()">
+              <i class="fa fa-repeat" aria-hidden="true"></i>  restore</button>
+        </div>
+          <!-- Modal control button -->
+          <button class="btn btn-light" data-toggle="modal" data-target="#codeSyncModal" onclick="codeSyncInitializer()">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>  share</button>
+          <!-- Modal -->
+          <div class="modal fade" id="codeSyncModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button class="btn btn-light" data-dismiss="modal" onclick="copyMySyncCode()">
+                      <i class="fa fa-files-o" aria-hidden="true"></i> Copy My Code</button>
+                  <script>
+                    function copyMySyncCode() {
+                      var mySyncCode = document.getElementById('codeSyncId');
+                      mySyncCode.select();
+                      document.execCommand('copy');
+                    }
+                  </script>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="input-group">
+                    <input id="codeSyncId" class="form-control"></input>
+                    <div class="input-group-btn">
+                        <button class="btn btn-light" type="button" data-dismiss="modal" onclick="initiateCodeSync()">
+                            <i class="fa fa-refresh" aria-hidden="true"></i> SYNC</button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+        <div class="btn-group">
+          <button id="themeSelectDropdown" type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+          <div class="dropdown-menu" aria-labelledby="themeSelectDropdown">
+            <a class="dropdown-item" onclick="changeThemeTo(this)" name="xcode">xcode</a>
+            <a class="dropdown-item" onclick="changeThemeTo(this)" name="solarized_light">solarized light</a>
+            <a class="dropdown-item" onclick="changeThemeTo(this)" name="chaos">chaos</a>
+            <a class="dropdown-item" onclick="changeThemeTo(this)" name="ambiance">ambiance</a>
+          </div>
         </div>
-      <div class="btn-group">
-        <button id="themeSelectDropdown" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Solarized Light</button>
-        <div class="dropdown-menu" aria-labelledby="themeSelectDropdown">
-          <a class="dropdown-item" onclick="changeThemeTo(this)" name="solarized_light">Solarized Light</a>
-          <a class="dropdown-item" onclick="changeThemeTo(this)" name="chaos">Chaos</a>
-          <a class="dropdown-item" onclick="changeThemeTo(this)" name="xcode">Xcode</a>
-          <a class="dropdown-item" onclick="changeThemeTo(this)" name="ambiance">Ambiance</a>
+        <button class="btn btn-light" onclick="compileAndRun()" style="float:right">
+            <i class="fa fa-play" aria-hidden="true"></i> run</button>
+      </div>
+    <!-- code for the video connection controls -->
+      <div class="col" id="video-controls">
+        <div class="input-group">
+        <input id="peerCodeInput" type="text" class="form-control" placeholder="PEER CODE" aria-label="Peer ID">
+        <div class="input-group-btn">
+          <button class="btn btn-light" type="button" onclick="connect()">connect</button>
+          <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="sr-only">Toggle Dropdown</span>
+          </button>
+          <div class="dropdown-menu">
+            <a id="myCode" class="dropdown-item" onclick="copyCode()"></a>
+            <input id="myCodeInvisible" class="sr-only"></input>
+          </div>
         </div>
       </div>
-      <button class="btn btn-secondary" onclick="compileAndRun()" style="float:right">RUN</button>
-    </div>
-  <!-- code for the video connection controls -->
-    <div class="col">
-      <div class="input-group">
-      <input id="peerCodeInput" type="text" class="form-control" placeholder="PEER CODE" aria-label="Peer ID">
-      <div class="input-group-btn">
-        <button class="btn btn-secondary" type="button" onclick="connect()">CONNECT</button>
-        <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <span class="sr-only">Toggle Dropdown</span>
-        </button>
-        <div class="dropdown-menu">
-          <a id="myCode" class="dropdown-item" onclick="copyCode()"></a>
-          <input id="myCodeInvisible" class="sr-only"></input>
-        </div>
+        <script>
+          function copyCode() {
+            var myCode = document.getElementById('myCodeInvisible');
+            myCode.select();
+            document.execCommand('copy');
+          }
+        </script>
       </div>
     </div>
-      <script>
-        function copyCode() {
-          var myCode = document.getElementById('myCodeInvisible');
-          myCode.select();
-          document.execCommand('copy');
-        }
-      </script>
-    </div>
-  </div>
-</div>
-<div class="container-fluid">
+
   <!-- code for the editor -->
   <div class="row">
     <div class="col-7">
-      <div id="editor">public class Solution {
+        <div id="editor">import java.util.*;
+
+public class Solution {
     public static void main(String args[]) {
 
     }
 }
-      </div>
+        </div>
     </div>
 
     <div class="col">
@@ -115,15 +137,15 @@
 
           <ul class="nav nav-tabs" id="io-tabs" role="io">
             <li class="nav-item">
-              <a class="nav-link active" id="output-tab" data-toggle="tab" href="#console-output" role="tab" aria-controls="console-output" aria-selected="true">OUTPUT</a>
+              <a class="nav-link" id="output-tab" data-toggle="tab" href="#console-output" role="tab" aria-controls="console-output" aria-selected="false"><span id="io-tab" style="color: #666666;">output</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="input-tab" data-toggle="tab" href="#console-input" role="tab" aria-controls="console-input" aria-selected="false">INPUT</a>
+              <a class="nav-link active" id="input-tab" data-toggle="tab" href="#console-input" role="tab" aria-controls="console-input" aria-selected="true"><span id="io-tab" style="color: #666666;">input</span></a>
             </li>
           </ul>
           <div class="tab-content" id="io-tab-content">
             <div class="tab-pane fade" id="console-output" role="tabpanel" aria-labelledby="output-tab">
-              <textarea id="stdout" class="form-control" style="resize:none;border-top:none;min-height:400px"></textarea>
+              <textarea id="stdout" class="form-control" style="resize:none;border-top:none;min-height:300px;"></textarea>
             </div>
 
             <div class="tab-pane fade show active" id="console-input" role="tabpanel" aria-labelledby="input-tab">
@@ -149,8 +171,8 @@
       enableSnippets: true,
       enableLiveAutocompletion: true
     });
-    setEditorTheme('solarized_light', 'Solarized Light');
-    setPageTheme('solarized_light');
+    setEditorTheme('xcode', 'xcode');
+    setPageTheme('xcode');
     editor.getSession().setMode("ace/mode/java");
     editor.$blockScrolling = Infinity;
     editor.setShowPrintMargin(false);

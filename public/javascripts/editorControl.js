@@ -21,6 +21,7 @@ function compileAndRun() {
     success: function(result) {
       var stdout = document.getElementById('stdout');
       stdout.value = result;
+      document.getElementById('output-tab').click();
     }
   });
 }

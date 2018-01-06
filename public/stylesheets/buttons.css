@@ -1,9 +1,8 @@
-.control-bar-button {
+button {
+   color: #666666 !important;
    border: none outset #272822;
    background-color: #272822;
    cursor:pointer;
-   color: white;
-   height: 30px;
 }
 
 .control-bar-button:hover {

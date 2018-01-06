@@ -1,0 +1,16 @@
+body {
+    background-color: #d2d7df;
+}
+
+#mainBody {
+    margin: 10px;
+    background-color: inherit;
+}
+
+#control-buttons {
+    margin-bottom: 10px;
+}
+
+#editor {
+
+}

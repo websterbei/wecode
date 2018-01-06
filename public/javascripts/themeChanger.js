@@ -11,8 +11,7 @@ function setPageTheme(theme) {
     xcode: '#FFFFFF',
     ambiance: '#202020'
   }
-  document.getElementById('wholePage').style.background = colorMap[theme];
-  document.body.style.background = colorMap[theme];
+  document.getElementById('editor').style.background = colorMap[theme];
 }
 
 function setEditorTheme(theme, themeLabel) {
