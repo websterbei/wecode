@@ -12,7 +12,7 @@ function compileAndRun() {
   var code = editor.session.getValue();
   var stdin = document.getElementById('stdin').value;
   $.post({
-    url: "compileAndRun",
+    url: "/compileAndRun",
     data: {
       language: "java",
       code: code,
