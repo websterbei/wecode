@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var fs = require('fs');
 var https = require('https');
+var http = require('http');
 var nunjucks = require('nunjucks');
 
 var index = require('./routes/index');
@@ -21,9 +22,9 @@ var port = 443;
 
 //SSL certificate
 var credentials = {
-    ca: fs.readFileSync('./ssl/wecode_datinker_com.ca-bundle'),
+    ca: fs.readFileSync('./ssl/tan90_tech.ca-bundle'),
     key: fs.readFileSync('./ssl/webster.key'),
-    cert: fs.readFileSync('./ssl/wecode_datinker_com.crt')
+    cert: fs.readFileSync('./ssl/tan90_tech.crt')
 };
 
 // view engine setup
@@ -70,9 +71,15 @@ app.use(function(err, req, res, next) {
 });
 
 var httpsServer = https.createServer(credentials, app);
-
+var httpServer = http.createServer(function (req, res) {
+  res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+  res.end();
+});
 httpsServer.listen(port, function() {
-  console.log("Express server listening on port " + port);
-});;
+  console.log("HTTPS server listening on port " + port);
+});
 
+httpServer.listen(80, function() {
+  console.log("HTTP  server listening on port "+80);
+});
 module.exports = app;
