@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- common.css -->
+  <style>* {-webkit-tap-highlight-color: rgba(0,0,0,0);}html {-webkit-text-size-adjust: none;}body {font-family: Arial, Helvetica, sans-serif;margin: 0;color: #333;word-wrap: break-word;}h1, h2, h3, h4, h5, h6 {line-height: 1.1;}img {max-width: 100% !important;}blockquote {margin: 0;padding: 0 15px;color: #777;border-left: 4px solid #ddd;}hr {background-color: #ddd;border: 0;height: 1px;margin: 15px 0;}code {font-family: Menlo, Consolas, 'Ubuntu Mono', Monaco, 'source-code-pro', monospace;line-height: 1.4;margin: 0;padding: 0.2em 0;font-size: 85%;background-color: rgba(0,0,0,0.04);border-radius: 3px;}pre {margin: 0;}pre > code {margin: 0;padding: 0;font-size: 100%;word-break: normal;background: transparent;border: 0;}ol {list-style-type: decimal;}ol ol, ul ol {list-style-type: lower-latin;}ol ol ol, ul ol ol, ul ul ol, ol ul ol {list-style-type: lower-roman;}table {border-spacing: 0;border-collapse: collapse;margin-top: 0;margin-bottom: 16px;}table th {font-weight: bold;}table th, table td {padding: 6px 13px;border: 1px solid #ddd;}table tr {border-top: 1px solid #ccc;}table tr:nth-child(even) {background-color: #f8f8f8;}input[type="checkbox"] {cursor: default;margin-right: 0.5em;font-size: 13px;}.task-list-item {list-style-type: none;}.task-list-item+.task-list-item {margin-top: 3px;}.task-list-item input {float: left;margin: 0.3em 1em 0.25em -1.6em;vertical-align: middle;}#tag-field {margin: 8px 2px 10px;}#tag-field .tag {display: inline-block;background: #cadff3;border-radius: 4px;padding: 1px 8px;color: black;font-size: 12px;margin-right: 10px;line-height: 1.4;}</style>
+  <!-- ace-static.css -->
+  <style>.ace_static_highlight {white-space: pre-wrap;}.ace_static_highlight .ace_gutter {width: 2em;text-align: right;padding: 0 3px 0 0;margin-right: 3px;}.ace_static_highlight.ace_show_gutter .ace_line {padding-left: 2.6em;}.ace_static_highlight .ace_line {position: relative;}.ace_static_highlight .ace_gutter-cell {-moz-user-select: -moz-none;-khtml-user-select: none;-webkit-user-select: none;user-select: none;top: 0;bottom: 0;left: 0;position: absolute;}.ace_static_highlight .ace_gutter-cell:before {content: counter(ace_line, decimal);counter-increment: ace_line;}.ace_static_highlight {counter-reset: ace_line;}</style>
+  <style>.ace-chrome .ace_gutter {background: #ebebeb;color: #333;overflow : hidden;}.ace-chrome .ace_print-margin {width: 1px;background: #e8e8e8;}.ace-chrome {background-color: #FFFFFF;color: black;}.ace-chrome .ace_cursor {color: black;}.ace-chrome .ace_invisible {color: rgb(191, 191, 191);}.ace-chrome .ace_constant.ace_buildin {color: rgb(88, 72, 246);}.ace-chrome .ace_constant.ace_language {color: rgb(88, 92, 246);}.ace-chrome .ace_constant.ace_library {color: rgb(6, 150, 14);}.ace-chrome .ace_invalid {background-color: rgb(153, 0, 0);color: white;}.ace-chrome .ace_fold {}.ace-chrome .ace_support.ace_function {color: rgb(60, 76, 114);}.ace-chrome .ace_support.ace_constant {color: rgb(6, 150, 14);}.ace-chrome .ace_support.ace_type,.ace-chrome .ace_support.ace_class.ace-chrome .ace_support.ace_other {color: rgb(109, 121, 222);}.ace-chrome .ace_variable.ace_parameter {font-style:italic;color:#FD971F;}.ace-chrome .ace_keyword.ace_operator {color: rgb(104, 118, 135);}.ace-chrome .ace_comment {color: #236e24;}.ace-chrome .ace_comment.ace_doc {color: #236e24;}.ace-chrome .ace_comment.ace_doc.ace_tag {color: #236e24;}.ace-chrome .ace_constant.ace_numeric {color: rgb(0, 0, 205);}.ace-chrome .ace_variable {color: rgb(49, 132, 149);}.ace-chrome .ace_xml-pe {color: rgb(104, 104, 91);}.ace-chrome .ace_entity.ace_name.ace_function {color: #0000A2;}.ace-chrome .ace_heading {color: rgb(12, 7, 255);}.ace-chrome .ace_list {color:rgb(185, 6, 144);}.ace-chrome .ace_marker-layer .ace_selection {background: rgb(181, 213, 255);}.ace-chrome .ace_marker-layer .ace_step {background: rgb(252, 255, 0);}.ace-chrome .ace_marker-layer .ace_stack {background: rgb(164, 229, 101);}.ace-chrome .ace_marker-layer .ace_bracket {margin: -1px 0 0 -1px;border: 1px solid rgb(192, 192, 192);}.ace-chrome .ace_marker-layer .ace_active-line {background: rgba(0, 0, 0, 0.07);}.ace-chrome .ace_gutter-active-line {background-color : #dcdcdc;}.ace-chrome .ace_marker-layer .ace_selected-word {background: rgb(250, 250, 255);border: 1px solid rgb(200, 200, 250);}.ace-chrome .ace_storage,.ace-chrome .ace_keyword,.ace-chrome .ace_meta.ace_tag {color: rgb(147, 15, 128);}.ace-chrome .ace_string.ace_regex {color: rgb(255, 0, 0)}.ace-chrome .ace_string {color: #1A1AA6;}.ace-chrome .ace_entity.ace_other.ace_attribute-name {color: #994409;}.ace-chrome .ace_indent-guide {background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==") right repeat-y;}</style>
+  <!-- export.css -->
+  <style>
+    body{margin:0 auto;max-width:800px;line-height:1.4}
+    #nav{margin:5px 0 10px;font-size:15px}
+    #titlearea{border-bottom:1px solid #ccc;font-size:17px;padding:10px 0;}
+    #contentarea{font-size:15px;margin:16px 0}
+    .cell{outline:0;min-height:20px;margin:5px 0;padding:5px 0;}
+    .code-cell{font-family:Menlo,Consolas,'Ubuntu Mono',Monaco,'source-code-pro',monospace;font-size:12px;}
+    .latex-cell{white-space:pre-wrap;}
+  </style>
+  <!-- User CSS -->
+  <style> .text-cell {font-size: 15px;}.code-cell {font-size: 12px;}.markdown-cell {font-size: 15px;}.latex-cell {font-size: 15px;}</style>
+</head>
+<body>
+  
+  <div id="titlearea">
+    <h2>CodePad Tutorial</h2>
+  </div>
+  <div id="contentarea"><div class="cell markdown-cell"><h1 id="introduction">Introduction</h1>
+<p>tan90 is an easy-to-use platform for technical interview and face-to-face tutoring in practical programming. I will walk you through the very basics that you need to utilize this platform.</p>
+<h1 id="interface">Interface</h1>
+<p><img src="images/guide-resources/0AE8A38DE48EBC03BA583227ABA1C56B.png" alt="Screen Shot 2018-01-06 at 5.34.06 PM.png"><br>Split at a default 7 to 5 ratio left to right, the tan90 CodePad interface consists of an editor, a console and a video chat panel (which by default is blank). When performing solo coding, one can simply type in the editor and click the "run" button at the top right corner of the editor to execute his code and view output of the code displayed at the console.<br>When connected to a peer through video chat, a video box will pop up on top of the console box so that the two coders can see and talk to each other while coding.</p>
+<h1 id="video-chat">Video Chat</h1>
+<p><center><img src="images/guide-resources/459BCB64A83B6469983FAA9C4F9F273E.png" alt="Screen Shot 2018-01-06 at 5.34.37 PM.png" style="width: 50%;"></center><br>To initiate a video chat with an arbitrary peer who is also using the tan90 CodePad, one only needs to perform the following steps:</p>
+<ol>
+<li>Click the inverted triangle at the top right corner, and click again the code in the dropdown. The code in the dropdown will be automatically copied to clipboard</li><li>Send the code to a friend who you would like to connect with</li><li>Your friend will paste the code into the "PEER CODE" box  and click "connect"</li></ol>
+<p><center><img src="images/guide-resources/A5CC761C0ABFEAD1C76475EA9F7164F6.png" alt="Screen Shot 2018-01-06 at 5.34.54 PM.png" style="width: 50%;"></center><br>That's it! The two of you should now be able to see and talk to each other.</p>
+<h1 id="code-sharing">Code Sharing</h1>
+<p>What's more? You can share your code to a peer so that the two of you can work on the same piece of code synchronously. To share your code, just follow the steps here:</p>
+<ol>
+<li>Click the "share" button, you should see a pop up. If you see something like "waiting for code", just close the pop up and try again</li><li>Now, the box within the pop up window contains your code that your friend is able to connect to you with. Just click "copy my code" and the code will be automatically copied to your clipboard</li><li>Send the code to a friend who you would like to share your code with</li><li>Your friend will open up the same pop up window and paste the code into the only input box</li><li>Click "SYNC" and the two of you will see each other typing in the same document</li></ol>
+<p><img src="images/guide-resources/7B594DD80744BF498DD485EB9D98DDD0.png" alt="Screen Shot 2018-01-06 at 5.35.24 PM.png"></p>
+<h1 id="creating-code-room">Creating Code Room</h1>
+<p>Now, it is not always convenient to share the code between you and your friend when the two of you are already using the CodePad. It would be wonderful if the two of you could just create a room beforehand that is specifically for the two of you, and when both of you are in the Code Room, a video chat can be initiated without having you send the code to your friend. Tan90 allows you to do exact that!<br><img src="images/guide-resources/A531FFD208552B0E4C70915F21C2747C.png" alt="Screen Shot 2018-01-10 at 6.06.14 PM.png"><br>When you are at this page, here are the steps to create a Code Room:</p>
+<ol>
+<li>Enter a name for the room (in the box of course)</li><li>Click "Create new room"</li><li>Tell your friend the name of the room you created (which shold definitely be easy to remember)</li><li>Both you and your friend can visit the page "tan90.tech/room/yourRoomName}" and start coding!</li></ol>
+<p>Note that when both of you are using the same Code Room (visiting the same page), you will be notified when your friend enters the room. To keep distractions away from you (also because that we are working on a better notification system), you will know your friend is ready to connect when you see that the box where you are supposed to be inputting your friend's special code is automatically filled up, like this:<br><center><img src="images/guide-resources/C093717800DD57631EE26B815DF0C5BE.png" alt="Screen Shot 2018-01-10 at 6.17.34 PM.png"></center><br>Don't be too surprised when you see this magic happening. The code that you see is that of your friend, and you can just click "connect" to meet your friend so long as the code is still there (that your friend is still in the Code Room).</p>
+</div></div>
+  <script></script>
+</body>
+</html>

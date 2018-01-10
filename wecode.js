@@ -16,6 +16,7 @@ var codepad = require('./routes/codepad');
 var createRoom = require('./routes/createRoom');
 var room = require('./routes/room');
 var userInRoom = require('./routes/userInRoom');
+var guide = require('./routes/guide');
 
 var app = express();
 var port = 443;
@@ -51,6 +52,7 @@ app.use('/compileAndRun', compileAndRun);
 app.use('/createRoom', createRoom);
 app.use('/room', room);
 app.use('/userInRoom', userInRoom);
+app.use('/guide', guide);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
