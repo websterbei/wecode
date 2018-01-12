@@ -8,9 +8,9 @@ var https = require('https');
 var fs = require('fs');
 
 var sslOptions = {
-  ca: fs.readFileSync('./ssl/wecode_datinker_com.ca-bundle'),
+  ca: fs.readFileSync('./ssl/tan90_tech.ca-bundle'),
   key: fs.readFileSync('./ssl/webster.key'),
-  cert: fs.readFileSync('./ssl/wecode_datinker_com.crt')
+  cert: fs.readFileSync('./ssl/tan90_tech.crt')
 };
 
 var server = https.createServer(sslOptions, app).listen(PORT);
