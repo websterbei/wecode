@@ -5,7 +5,7 @@ generateCodeSyncPeerAndListen();
 
 function generateCodeSyncPeerAndListen() {
   if(!codeSyncPeer || !codeSyncPeer.id) {
-    codeSyncPeer = new Peer({host: "wecode.datinker.com", port: 8080, path: "/peerjs", secure: true, debug:true, config: peerConfig});
+    codeSyncPeer = new Peer({host: "tan90.tech", port: 8080, path: "/peerjs", secure: true, debug:true, config: peerConfig});
     codeSyncPeer.on('open', function(id) {
       setCookie('codeSyncId', id, 3);
       codeSyncPeer.on('connection', function(conn) {

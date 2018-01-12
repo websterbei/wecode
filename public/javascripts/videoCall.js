@@ -35,7 +35,7 @@ var proxyList = [{url:'stun:stun01.sipphone.com'},
 
 var peerConfig = {'iceServers': proxyList};
 //Creating peer object through peerjs server
-var peer = new Peer({host: "wecode.datinker.com", port: 8080, path: "/peerjs", secure: true, debug:true, config: peerConfig});
+var peer = new Peer({host: "tan90.tech", port: 8080, path: "/peerjs", secure: true, debug:true, config: peerConfig});
 //Open socket, get personal ID and display ID
 peer.on('open', function(id) {
   document.getElementById('myCode').innerHTML = id;
